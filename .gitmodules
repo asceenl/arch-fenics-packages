@@ -64,3 +64,6 @@
 [submodule "mshr"]
 	path = mshr
 	url = https://aur.archlinux.org/mshr.git
+[submodule "openmpi"]
+	path = openmpi
+	url = ./openmpi
