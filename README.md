@@ -7,10 +7,23 @@ Why don't I put the `-sm` packages on the AUR? Because it's considered bad pract
 
 ## Installing FEniCS
 
-First, make sure the following packages are installed from the official Arch repository (the command can be copy-pasted):
+First, clone this repository, including all the git submodules:
+```
+git clone --branch openmpi3 --recurse-submodules https://github.com/sigvaldm/arch-fenics-packages.git
+```
+If you forgot `--recurse-submodules` most folders will be empty. No worries. You can still their contents by running `git submodule init` followed by `git submodule update`.
+
+Then, install Openmpi version 3 from the repo:
 
 ```
-sudo pacman -S \
+$ cd arch-fenics-packages/openmpi/repos/extra-x86_64
+$ makepkg -is
+```
+
+Then, make sure the following packages are installed from the official Arch repository (the command can be copy-pasted):
+
+```
+$ sudo pacman -S \
     gcc-fortran \
     python-mpi4py \
     python-matplotlib \
@@ -20,12 +33,8 @@ sudo pacman -S \
     valgrind \
     suitesparse
 ```
+
 This should cover missing dependencies from the AUR packages, as well as optional dependencies which are nice to have. (There may be fewer missing dependencies now than when I made this list, but it doesn't hurt to install them in advance anyway).
-Next, clone this repository, including all the git submodules:
-```
-git clone --recurse-submodules https://github.com/sigvaldm/arch-fenics-packages.git
-```
-If you forgot `--recurse-submodules` most folders will be empty. No worries. You can still their contents by running `git submodule init` followed by `git submodule update`.
 
 Then, install the packages in the following order (this order takes into account dependencies):
 
@@ -49,7 +58,7 @@ Then, install the packages in the following order (this order takes into account
 - `mshr`
 - `python-mshr`
 
-This is done by entering the respective directory in this repository and running `makepkg -sri`.
+This is again done by entering the respective directory in this repository and running `makepkg -sri`.
 
 I might try to make this less cumbersome in the future, but it should work for now.
 
